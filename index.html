@@ -3,13 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dixwell Digital</title>
-<meta name="description" content="Dixwell Digital builds and maintains websites for Hamden, CT businesses. See your site before you pay. One monthly fee covers hosting, domain and updates.">
+<title>Dixwell Digital | Websites for Hamden businesses</title>
+<meta name="description" content="Dixwell Digital builds and maintains websites for businesses in Hamden and North Haven, CT. See your site before you pay. One monthly fee covers hosting, your domain and updates.">
+<link rel="canonical" href="https://dixwelldigital.com/">
+<meta name="theme-color" content="#F5F2EA">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dixwell Digital">
+<meta property="og:title" content="Dixwell Digital | Websites for Hamden businesses">
+<meta property="og:description" content="See your website before you pay. One monthly fee covers hosting, your domain and updates.">
+<meta property="og:url" content="https://dixwelldigital.com/">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -111 531 531"%3E%3Crect x="-40" y="-111" width="531" height="531" rx="110" fill="%23F5F2EA"/%3E%3Ccircle cx="47" cy="254" r="47" fill="%23E8590C"/%3E%3Cpath fill="%23161616" fill-rule="evenodd" d="M125 0H288.5C378.3 0 451 69.2 451 154.5S378.3 309 288.5 309H125ZM201 70V247H300C338.4 247 369.5 207.4 369.5 158.5S338.4 70 300 70Z"/%3E%3C/svg%3E'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Dixwell Digital",
+  "url": "https://dixwelldigital.com/",
+  "telephone": "+1-914-953-1830",
+  "email": "hello@dixwelldigital.com",
+  "description": "Websites for Hamden businesses, built before you pay and kept up to date for one monthly fee.",
+  "founder": {"@type": "Person", "name": "Santiago Mora-Parmalee"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Hamden", "addressRegion": "CT", "addressCountry": "US"},
+  "areaServed": [
+    {"@type": "City", "name": "Hamden, CT"},
+    {"@type": "City", "name": "North Haven, CT"}
+  ]
+}
+</script>
 <style>
-/* Dixwell Digital brand, matching the business card. Single light theme by choice.
+/* Dixwell Digital brand: the .D logo (Branding/), card stock, ink and orange, Space Grotesk over Inter.
+   Single light theme by choice. Self-contained: no image files, so it uploads to the site repo as index.html.
    Layout: header bar, split hero with a phone preview, then stacked sections on a 1080px column. */
 :root{
   --stock:#F5F2EA;      /* page ground, same as the card stock */
@@ -17,14 +43,14 @@
   --ink:#161616;        /* text */
   --muted:#4A4743;      /* secondary text, 8:1 on stock */
   --rule:#D9D3C7;       /* hairlines */
-  --accent:#E8590C;     /* brand orange, used for marks and fills, not small text */
+  --accent:#E8590C;     /* brand orange, the logo dot; for marks and fills, not small text */
   --accent-ink:#A33B05; /* orange dark enough for text and links */
   --display:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
   --body:"Inter", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--stock);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
 a{color:var(--accent-ink)}
 a:hover{color:var(--ink)}
@@ -35,12 +61,14 @@ h2{font-size:clamp(28px,3.6vw,38px);letter-spacing:-0.6px;font-weight:700}
 h3{font-size:20px;font-weight:700;letter-spacing:-0.2px}
 p{margin:0}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-.mark{display:inline-block;width:14px;height:14px;background:var(--accent);flex-shrink:0}
+.logo .d{fill:var(--ink)}
+.logo .o{fill:var(--accent)}
 
 /* Header */
 header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-0.3px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-0.3px}
+.brand .logo{height:24px;width:auto;display:block}
 nav{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:15px}
 nav a:hover{color:var(--accent-ink)}
@@ -52,7 +80,7 @@ nav a:hover{color:var(--accent-ink)}
 nav .btn{min-height:44px;padding:0 18px;font-size:15px}
 
 /* Hero */
-.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center;padding:64px 0 72px}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center;padding-top:64px;padding-bottom:72px}
 .hero .lead{font-size:20px;line-height:1.55;color:var(--muted);max-width:34ch;margin-top:20px}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 .fine{margin-top:18px;font-size:15px;color:var(--muted)}
@@ -94,8 +122,7 @@ section{padding:72px 0;border-top:1px solid var(--rule)}
 .price small{font-family:var(--body);font-size:16px;font-weight:500;letter-spacing:0;color:var(--muted)}
 .setup{font-size:15px;color:var(--muted);margin-top:-4px}
 .plan ul{margin:4px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:16px}
-.founding{margin-top:28px;max-width:820px;display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px dashed var(--accent-ink);border-radius:12px;padding:18px 20px;font-size:16px}
-.terms{margin-top:16px;font-size:15px;color:var(--muted);max-width:70ch}
+.terms{margin-top:24px;font-size:15px;color:var(--muted);max-width:70ch}
 
 .who{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .who span{border:1.5px solid var(--ink);border-radius:999px;padding:8px 16px;font-weight:500;font-size:15px}
@@ -103,6 +130,15 @@ section{padding:72px 0;border-top:1px solid var(--rule)}
 .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
 .about p+p{margin-top:14px}
 .about .text{color:var(--muted);font-size:18px;max-width:52ch}
+
+.faq{margin-top:32px;max-width:820px;border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;padding:14px 0;font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-0.2px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--body);font-size:26px;font-weight:400;line-height:1;color:var(--accent-ink);flex-shrink:0;transition:transform .15s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary:hover{color:var(--accent-ink)}
+.faq details p{padding:0 0 22px;color:var(--muted);max-width:64ch}
 
 .contact{background:var(--ink);color:var(--stock);border-top:none}
 .contact h2{color:var(--stock)}
@@ -118,10 +154,15 @@ section{padding:72px 0;border-top:1px solid var(--rule)}
 .contact .btn-solid:hover{background:#FF7A33;border-color:#FF7A33;color:#161616}
 
 footer{background:var(--ink);color:#CFC9BD;font-size:14px;border-top:1px solid #3A3835}
-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:22px;padding-bottom:26px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:22px;padding-bottom:26px}
+footer .sign{display:flex;align-items:center;gap:10px}
+footer .logo{height:16px;width:auto;display:block}
+footer .logo .d{fill:var(--stock)}
+footer a{color:#CFC9BD}
+footer a:hover{color:#FFB48A}
 
 @media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:44px;padding:44px 0 56px}
+  .hero{grid-template-columns:1fr;gap:44px;padding-top:44px;padding-bottom:56px}
   .steps,.contact-grid{grid-template-columns:1fr}
   .about{grid-template-columns:1fr;gap:16px}
 }
@@ -131,18 +172,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   section{padding:56px 0}
   body{font-size:16px}
   .hero .lead{font-size:18px}
+  .faq summary{font-size:17px}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap bar">
-    <a class="brand" href="#top" aria-label="Dixwell Digital, back to top"><span class="mark" aria-hidden="true"></span>Dixwell Digital</a>
+    <a class="brand" href="#top" aria-label="Dixwell Digital, back to top">
+      <svg class="logo" viewBox="0 0 451 309" aria-hidden="true"><circle class="o" cx="47" cy="254" r="47"/><path class="d" fill-rule="evenodd" d="M125 0H288.5C378.3 0 451 69.2 451 154.5S378.3 309 288.5 309H125ZM201 70V247H300C338.4 247 369.5 207.4 369.5 158.5S338.4 70 300 70Z"/></svg>
+      Dixwell Digital
+    </a>
     <nav aria-label="Main">
       <a class="navlink" href="#how">How it works</a>
       <a class="navlink" href="#pricing">Pricing</a>
+      <a class="navlink" href="#faq">FAQ</a>
       <a class="navlink" href="#contact">Contact</a>
       <a class="btn btn-solid" href="tel:+19149531830">Call or text</a>
     </nav>
@@ -158,7 +204,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         <a class="btn btn-solid" href="tel:+19149531830">Call or text (914) 953-1830</a>
         <a class="btn btn-line" href="#pricing">See pricing</a>
       </div>
-      <p class="fine">Hosting, your domain and edits are included. No setup fee on the Basic plan.</p>
+      <p class="fine">Hosting, your domain and edits are included. No setup fee on the Basic plan. Serving Hamden and North Haven.</p>
     </div>
 
     <div>
@@ -202,11 +248,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         </li>
         <li>
           <h3>You look it over</h3>
-          <p>I show it to you on a phone at your shop. Ask for changes, or say no and owe nothing.</p>
+          <p>I bring it to your shop and show it to you on my phone. Ask for changes, or say no: I delete the preview and you owe nothing.</p>
         </li>
         <li>
           <h3>It goes live and I keep it running</h3>
-          <p>I handle hosting, your domain and security. When your hours, prices or menu change, text me and I update it.</p>
+          <p>I handle hosting, your domain and security. When your hours, prices or menu change, text me and it's updated within 3 business days.</p>
         </li>
       </ol>
     </div>
@@ -221,7 +267,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A33B05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hours that match your Google listing</li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A33B05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Your best customer reviews, front and center</li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A33B05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>A layout built for phones first</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A33B05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>A link to and from your Google listing</li>
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A33B05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Your own .com address, registered in your name</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A33B05" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hosting and a security certificate, so visitors see the padlock</li>
       </ul>
     </div>
   </section>
@@ -254,20 +302,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
           </ul>
         </div>
       </div>
-      <div class="founding">
-        <span class="mark" aria-hidden="true" style="margin-top:5px"></span>
-        <p><strong>Founding rate:</strong> my first Hamden clients get Basic for $59 a month, locked for 12 months.</p>
-      </div>
-      <p class="terms">Plans run for a 12-month minimum, then month to month. Billing is automatic each month by card.</p>
+      <p class="terms">Every plan has a 12-month minimum, then runs month to month. Billing is automatic each month by card.</p>
     </div>
   </section>
 
   <section id="who">
     <div class="wrap">
       <h2>Who I build for</h2>
-      <p class="intro">Independent businesses around Hamden that customers find on Google Maps.</p>
+      <p class="intro">Independent businesses in Hamden and North Haven that customers find on Google Maps. Without a website, your Google listing is missing the button people tap most.</p>
       <div class="who">
-        <span>Auto repair shops</span>
+        <span>Auto repair and body shops</span>
         <span>Barbershops and salons</span>
         <span>Landscapers</span>
         <span>Delis and pizza places</span>
@@ -282,6 +326,34 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <div class="text">
         <p>I'm Santiago Mora-Parmalee. I build every Dixwell Digital site myself, and I'm the person you call or text when something needs changing.</p>
         <p>No call centers, no ticket system, and no logins you have to remember.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Straight answers</h2>
+      <div class="faq">
+        <details>
+          <summary>What counts as an edit?</summary>
+          <p>Any change to existing text, hours, prices, photos or menu items that takes under 30 minutes. Text or email me and it's done within 3 business days. Unused edits don't roll over. New pages or features are quoted in writing before I start.</p>
+        </details>
+        <details>
+          <summary>Who owns the site?</summary>
+          <p>You own your business name, logo, photos, text and your domain, which is registered in your name. I own the design and code and license them to you while you're a client.</p>
+        </details>
+        <details>
+          <summary>What if I want to stop?</summary>
+          <p>After the 12-month minimum, either of us can cancel with 30 days' notice. Within 14 days I send you your content and the code to move your domain anywhere you like.</p>
+        </details>
+        <details>
+          <summary>What do I have to do?</summary>
+          <p>Approve the site by text or email before it goes live, then tell me when something changes. That's it.</p>
+        </details>
+        <details>
+          <summary>Why not build it myself on Wix or an AI builder?</summary>
+          <p>Those cost less, but you set the site up and keep it current yourself. With me, you never have to touch it.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -302,7 +374,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         </div>
         <div class="contact-card">
           <div class="label">Area</div>
-          <div class="value">Hamden, CT</div>
+          <div class="value">Hamden and North Haven, CT</div>
           <div class="note">I visit shops in person</div>
         </div>
       </div>
@@ -315,8 +387,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 
 <footer>
   <div class="wrap">
-    <span>&copy; 2026 Dixwell Digital. Hamden, Connecticut.</span>
-    <span>Websites for Hamden businesses</span>
+    <span class="sign">
+      <svg class="logo" viewBox="0 0 451 309" aria-hidden="true"><circle class="o" cx="47" cy="254" r="47"/><path class="d" fill-rule="evenodd" d="M125 0H288.5C378.3 0 451 69.2 451 154.5S378.3 309 288.5 309H125ZM201 70V247H300C338.4 247 369.5 207.4 369.5 158.5S338.4 70 300 70Z"/></svg>
+      &copy; 2026 Dixwell Digital. Hamden, Connecticut.
+    </span>
+    <a href="https://dixwelldigital.com/">dixwelldigital.com</a>
   </div>
 </footer>
 
