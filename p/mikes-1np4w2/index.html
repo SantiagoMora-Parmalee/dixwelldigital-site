@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mike's Auto Clinic · Preview by Dixwell Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Dixwell Digital demo: "Mapleton" (heritage family garage).
+   Best for: shops that have been around for decades, small-town and family-owned garages, older customers.
+   Layout: centered masthead, the car on a round turntable with repair options on both sides,
+   a "menu board" price list with dotted leaders, an owner's story, booking in a centered card. */
+:root{
+  --paper:#F2EADC; --card:#FBF6EC; --ink:#2B1D14; --muted:#6A5646; --rule:#D8CBB4;
+  --red:#9B2C1F;   /* oxblood, text-safe on paper */
+  --green:#2F4A3A; --gold:#B8862F;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Work Sans","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--red);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-family:var(--serif);margin:0;line-height:1.08;font-weight:600;text-wrap:balance;font-variation-settings:"opsz" 120}
+h1 em,h2 em{font-style:italic;font-weight:400;color:var(--red)}
+h2{font-size:clamp(34px,4.6vw,56px);letter-spacing:-.5px}
+h3{font-size:21px;font-variation-settings:"opsz" 30}
+p{margin:0}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+.small-caps{font-size:12.5px;letter-spacing:2.4px;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px;border-radius:4px;font:600 16px var(--sans);text-decoration:none;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:background .15s,color .15s}
+.btn:hover{background:var(--ink);color:var(--card)}
+.btn-red{background:var(--red);border-color:var(--red);color:#FFF8EE}
+.btn-red:hover{background:#7E2117;border-color:#7E2117;color:#FFF8EE}
+
+/* Top ribbon + masthead */
+.preview-bar{background:#161616;color:#F5F2EA;font:500 13px/1.4 "Work Sans",Arial,sans-serif;text-align:center;padding:8px 16px}.preview-bar b{color:#E8590C}
+.ribbon{background:var(--green);color:#EFE7D6;font-size:14px}
+.ribbon .wrap{display:flex;justify-content:center;gap:10px 28px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+.ribbon a{color:#EFE7D6}
+.mast{border-bottom:1px solid var(--rule)}
+.mast .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-top:22px;padding-bottom:22px}
+.mast nav{display:flex;gap:26px;font-size:15px}
+.mast nav a{text-decoration:none}
+.mast nav a:hover{color:var(--red)}
+.brand{text-align:center;text-decoration:none;display:block}
+.brand b{display:block;font-family:var(--serif);font-weight:800;font-size:34px;letter-spacing:5px;line-height:1;font-variation-settings:"opsz" 144}
+.brand>span{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:8px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:600}
+.brand>span::before,.brand>span::after{content:"";width:28px;border-top:3px double var(--red)}
+.mast .right{display:flex;justify-content:flex-end;align-items:center;gap:16px}
+.mast .right .btn{min-height:44px;padding:0 18px;font-size:15px}
+
+/* Hero */
+.hero{text-align:center;padding:72px 0 20px}
+.hero h1{font-size:clamp(42px,6.4vw,80px);letter-spacing:-1px}
+.hero .sub{font-size:19px;color:var(--muted);max-width:50ch;margin:22px auto 0}
+
+/* Turntable */
+.turn{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:center;padding:36px 0 24px}
+.opts{display:flex;flex-direction:column;gap:14px}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:block;padding:16px 20px;background:var(--card);border:1px solid var(--rule);border-radius:6px;transition:border-color .2s,box-shadow .2s}
+.opt .no{font-family:var(--serif);font-style:italic;color:var(--red);font-size:15px}
+.opt b{display:block;font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.2;margin-top:2px}
+.opt small{font-size:14px;color:var(--muted)}
+.opt::after{content:"";position:absolute;top:50%;width:28px;border-top:1.5px dashed var(--rule);transition:border-color .2s}
+.opts.left .opt::after{left:100%}
+.opts.right .opt::after{right:100%}
+.opts.left{text-align:right}
+.opt:hover,.opt.active{border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.opt.active::after{border-top-color:var(--red)}
+.opt.active .no::before{content:"● ";font-style:normal;font-size:11px;vertical-align:2px}
+.opt:focus-visible{outline:2.5px solid var(--red);outline-offset:3px}
+.table{position:relative;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 50% 42%,#FFFDF8 0%,#F6EEDF 60%,#EADFCB 100%);
+  border:1.5px solid var(--ink);box-shadow:0 0 0 10px var(--paper),0 0 0 11.5px var(--ink)}
+.table canvas{width:100%;height:100%;display:block;border-radius:50%;cursor:grab;touch-action:pan-y}
+.table canvas.dragging{cursor:grabbing}
+.table.no3d{display:none}
+.table .cap{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap;pointer-events:none}
+.part-label{position:absolute;left:0;top:0;transform:translate(-50%,-100%);background:var(--ink);color:#FFF8EE;border:0;border-radius:4px;padding:8px 14px;font:500 14px var(--sans);cursor:pointer;white-space:nowrap;min-height:38px}
+.part-label em{font-family:var(--serif);color:#F2B8A8;margin-left:6px}
+.part-label::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:16px;background:var(--ink)}
+.part-label[hidden]{display:none}
+.turn-hint{text-align:center;color:var(--muted);font-family:var(--serif);font-style:italic;font-size:18px}
+
+/* Ornament divider */
+.orn{display:flex;align-items:center;gap:18px;justify-content:center;color:var(--red);margin:84px 0 0}
+.orn::before,.orn::after{content:"";flex:1;max-width:320px;border-top:3px double var(--rule)}
+
+section.block{padding:84px 0}
+.center-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.center-head p{color:var(--muted);margin-top:18px;font-size:18px}
+.center-head .small-caps{display:block;margin-bottom:16px;color:var(--red)}
+
+/* Menu board */
+.menu{background:var(--card);border:3px double var(--ink);padding:44px 52px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 64px;position:relative}
+.menu::before{content:"Service Menu";position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 18px;font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.2;color:var(--red)}
+.item{all:unset;box-sizing:border-box;cursor:pointer;display:block;padding:16px 0;border-bottom:1px solid var(--rule)}
+.item .line{display:flex;align-items:baseline;gap:10px}
+.item .line b{font-family:var(--serif);font-size:21px;font-weight:600}
+.item .line i{flex:1;border-bottom:2px dotted #B9A98E;transform:translateY(-5px)}
+.item .line span{font-family:var(--serif);font-size:19px;color:var(--red);white-space:nowrap}
+.item p{font-size:15px;color:var(--muted);margin-top:4px}
+.item p small{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:var(--green);margin-left:8px;white-space:nowrap}
+.item:hover .line b{color:var(--red)}
+.item:focus-visible{outline:2.5px solid var(--red);outline-offset:4px}
+.menu-note{text-align:center;color:var(--muted);font-size:15px;margin-top:22px;font-style:italic;font-family:var(--serif)}
+
+/* Story */
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:64px;align-items:center}
+.photo{aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#E6D9C2 0 14px,#EADFCB 14px 28px);border:10px solid var(--card);box-shadow:0 1px 0 var(--rule),0 24px 40px -28px rgba(43,29,20,.5);transform:rotate(-1.5deg);display:grid;place-items:end center;padding:22px}
+.photo span{background:var(--card);padding:6px 14px;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted)}
+.story p{font-size:18px;margin-top:20px;max-width:52ch}
+.story p:first-of-type{font-family:var(--serif);font-size:24px;line-height:1.45;color:var(--ink)}
+.sig{font-family:var(--serif);font-style:italic;font-size:30px;color:var(--red);margin-top:26px}
+.sig small{display:block;font-family:var(--sans);font-style:normal;font-size:14px;color:var(--muted)}
+.facts{display:flex;gap:36px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid var(--rule)}
+.facts b{display:block;font-family:var(--serif);font-size:32px;color:var(--green)}
+.facts span{font-size:14px;color:var(--muted)}
+
+/* Reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.review{margin:0;padding:8px 36px;text-align:center;border-left:1px solid var(--rule)}
+.review:first-child{border-left:0}
+.review blockquote{margin:0;font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.5}
+.review figcaption{margin-top:18px;font-size:14px;color:var(--muted)}
+.stars{color:var(--gold);letter-spacing:3px;display:block;margin-bottom:14px}
+
+/* Visit */
+.visit{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.sign{background:var(--green);color:#F4ECDD;border-radius:6px;padding:40px;position:relative}
+.sign::before{content:"";position:absolute;inset:8px;border:1.5px solid rgba(244,236,221,.35);border-radius:3px;pointer-events:none}
+.sign h2{color:#F4ECDD}
+.sign h2 em{color:#E9C27A}
+.sign .addr{font-family:var(--serif);font-size:22px;margin-top:14px}
+.hours{width:100%;border-collapse:collapse;margin-top:22px;font-variant-numeric:tabular-nums}
+.hours td{padding:10px 0;border-bottom:1px dotted rgba(244,236,221,.35);font-size:16px}
+.hours td:last-child{text-align:right}
+.hours tr.today td{color:#E9C27A;font-weight:600}
+.sign .btn{border-color:#F4ECDD;color:#F4ECDD}
+.sign .btn:hover{background:#F4ECDD;color:var(--green)}
+.sign .btn-red{background:#E9C27A;border-color:#E9C27A;color:var(--ink)}
+.sign .btn-red:hover{background:#F2D49A;color:var(--ink)}
+.map{aspect-ratio:1/1;border:1px solid var(--rule);border-radius:6px;background:
+  repeating-linear-gradient(0deg,transparent 0 43px,#E3D7C2 43px 44px),repeating-linear-gradient(90deg,transparent 0 43px,#E3D7C2 43px 44px),var(--card);display:grid;place-items:center;text-align:center;padding:24px}
+.map .pin{width:20px;height:20px;border-radius:50%;background:var(--red);border:4px solid var(--card);box-shadow:0 0 0 1.5px var(--red);margin:0 auto 10px}
+.map small{display:block;color:var(--muted)}
+footer{border-top:3px double var(--rule);font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;padding-bottom:30px}
+.mobile-bar{display:none}
+
+/* Booking card */
+.scrim{position:fixed;inset:0;background:rgba(43,29,20,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.sheet{position:fixed;left:50%;top:50%;width:min(600px,calc(100% - 32px));max-height:min(820px,calc(100% - 48px));background:var(--card);border:3px double var(--ink);z-index:50;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translate(-50%,-46%);transition:opacity .2s,transform .2s}
+body.booking .scrim{opacity:1;pointer-events:auto}
+body.booking .sheet{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;border-bottom:1px solid var(--rule)}
+.sheet-head h2{font-size:30px}
+.close{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--rule)}
+.close:hover{border-color:var(--ink)}
+.close:focus-visible{outline:2.5px solid var(--red)}
+.sheet form{flex:1;overflow-y:auto;padding:22px 26px 8px;display:flex;flex-direction:column;gap:24px}
+.gt{display:block;margin-bottom:10px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;border:0;margin:0;padding:0}
+.chips legend{padding:0}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-flex;align-items:center;min-height:42px;padding:0 15px;border-radius:4px;border:1.5px solid var(--rule);font-size:15px;font-weight:500;cursor:pointer;background:#fff}
+.chip input:checked+span{background:var(--ink);border-color:var(--ink);color:#FFF8EE}
+.chip input:focus-visible+span{outline:2.5px solid var(--red);outline-offset:2px}
+.days .chip span{flex-direction:column;justify-content:center;min-height:58px;line-height:1.15}
+.days .chip small{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field label{display:block;margin-bottom:6px;font-size:14px;font-weight:600}
+.field input{width:100%;min-height:50px;border-radius:4px;border:1.5px solid var(--rule);background:#fff;color:var(--ink);font:500 17px var(--sans);padding:0 14px}
+.field input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(155,44,31,.2)}
+.sheet-foot{padding:16px 26px 22px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+.sheet-foot .btn{width:100%}
+.summary{font-size:15px;color:var(--muted)}
+.summary b{color:var(--ink)}
+.callalt{font-size:14px;color:var(--muted);text-align:center}
+.error{color:var(--red);font-size:14px;min-height:20px}
+.done{display:none;padding:36px 26px;flex-direction:column;gap:16px}
+body.sent .sheet form,body.sent .sheet-foot{display:none}
+body.sent .done{display:flex}
+.done .check{width:56px;height:56px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+.done .demo{border:1px dashed var(--muted);border-radius:4px;padding:14px 16px;font-size:14px;color:var(--muted)}
+
+@media (max-width:1000px){
+  .mast .wrap{grid-template-columns:1fr auto}
+  .mast nav{display:none}
+  .brand{text-align:left}
+  .brand>span{justify-content:flex-start}
+  .brand>span::before{display:none}
+  .turn{grid-template-columns:1fr 1fr;gap:10px}
+  .table{order:-1;grid-column:1 / -1;width:min(560px,100%);margin:0 auto 18px}
+  .opts{display:contents}
+  .opts{text-align:left}
+  .opt::after{display:none}
+  .menu{grid-template-columns:1fr;padding:40px 28px}
+  .story,.visit{grid-template-columns:1fr;gap:40px}
+  .photo{max-width:420px}
+  .reviews{grid-template-columns:1fr;gap:32px}
+  .review{border-left:0;padding:0}
+}
+@media (max-width:640px){
+  .wrap{padding:0 18px}
+  body{font-size:16px}
+  .brand b{font-size:24px;letter-spacing:3px}
+  .mast .right .btn{display:none}
+  .hero{padding-top:44px}
+  .opt{padding:12px 14px}
+  .opt b{font-size:18px}
+  .menu{padding:36px 18px}
+  .item .line b{font-size:18px}
+  .sign{padding:30px 24px}
+  .two{grid-template-columns:1fr}
+  .mobile-bar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--rule)}
+  footer{padding-bottom:76px}
+  .sheet{top:auto;bottom:0;left:0;width:100%;max-height:92%;transform:translateY(100%);border-width:3px 0 0}
+  body.booking .sheet{transform:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="preview-bar"><b>Private preview</b> made for Mike's Auto Clinic by Dixwell Digital. Not live. Wording and services are drafts for you to change.</div>
+
+<div class="ribbon"><div class="wrap">
+  <span data-fill="open"></span><span>·</span><span data-fill="address"></span><span>·</span><a data-tel data-fill="phone" href="#"></a>
+</div></div>
+
+<header class="mast">
+  <div class="wrap">
+    <nav aria-label="Main"><a href="#menu">Services</a><a href="#story">Our story</a><a href="#visit">Visit</a></nav>
+    <a class="brand" href="#top" aria-label="Back to top"><b>MIKE'S</b><span><em style="font-style:normal">Auto Clinic · Est. <i data-fill="since" style="font-style:normal"></i></em></span></a>
+    <div class="right"><a data-tel href="#" style="font-weight:600;text-decoration:none" data-fill="phone"></a><button class="btn btn-red" type="button" data-book="">Book a visit</button></div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="small-caps" data-fill="townLine"></span>
+      <h1 style="margin-top:18px">Your neighborhood garage, <em>since <span data-fill="since"></span>.</em></h1>
+      <p class="sub" data-fill="tagline"></p>
+      <div class="turn">
+        <div class="opts left" id="opts-left"></div>
+        <div class="table" id="stage">
+          <canvas id="car3d" role="img" aria-label="3D car on a turntable. Tap a highlighted part to book that repair."></canvas>
+          <button class="part-label" id="part-label" type="button" data-book="" hidden><span id="part-label-text"></span><em>book →</em></button>
+          <span class="cap">Drag to turn</span>
+        </div>
+        <div class="opts right" id="opts-right"></div>
+      </div>
+      <p class="turn-hint">Point to the trouble spot and we'll take a look.</p>
+    </div>
+  </section>
+
+  <div class="orn" aria-hidden="true">✦</div>
+
+  <section class="block" id="menu">
+    <div class="wrap">
+      <div class="center-head">
+        <span class="small-caps">The work we do</span>
+        <h2>Honest work, <em>explained.</em></h2>
+        <p>Tell us what your car is doing. We'll explain what it needs and what it costs before we start. Tap any service to book it.</p>
+      </div>
+      <div class="menu" id="menu-list"></div>
+      <p class="menu-note">Don't see it listed? Call us. Foreign or domestic, new or old.</p>
+    </div>
+  </section>
+
+  <section class="block" id="story" style="padding-top:20px">
+    <div class="wrap story">
+      <div class="photo" aria-label="Photo placeholder"><span>Your photo of the shop goes here</span></div>
+      <div>
+        <span class="small-caps" style="color:var(--red)">Our story</span>
+        <h2 style="margin-top:14px">Family owned <em>since 1973.</em></h2>
+        <p>Mike's Auto Clinic has been fixing Hamden's cars on Gorham Ave for more than fifty years. It's still a family shop, and John and the crew still run it the same way.</p>
+        <p>Customers say the same things again and again: fair prices, a crew that explains what's wrong in plain English, and work done when promised. New to Hamden, or here for Quinnipiac drop-off? You're in good hands.</p>
+        <p class="sig" data-fill="owner"></p>
+        <div class="facts">
+          <div><b data-fill="years"></b><span>years in business</span></div>
+          <div><b><span data-fill="rating"></span>★</b><span><span data-fill="reviews"></span> Google reviews</span></div>
+          <div><b data-fill="warrantyShort"></b><span>Monday to Friday</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="orn" aria-hidden="true" style="margin-top:0">✦</div>
+
+  <section class="block" id="reviews">
+    <div class="wrap">
+      <div class="center-head"><span class="small-caps">Kind words</span><h2>From our <em>neighbors.</em></h2></div>
+      <div class="reviews" id="rev"></div>
+    </div>
+  </section>
+
+  <section class="block" id="visit" style="padding-top:20px">
+    <div class="wrap visit">
+      <div class="sign">
+        <span class="small-caps" style="color:#E9C27A">Come see us</span>
+        <h2 style="margin-top:12px">Stop by, <em>any weekday.</em></h2>
+        <p class="addr" data-fill="address"></p>
+        <table class="hours" data-hours aria-label="Opening hours"></table>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+          <button class="btn btn-red" type="button" data-book="">Book a visit</button>
+          <a class="btn" data-directions href="#">Directions</a>
+        </div>
+      </div>
+      <div class="map" aria-label="Map placeholder"><div><div class="pin"></div><b data-fill="name"></b><small>The live site shows a Google map here</small></div></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© <span data-fill="year"></span> <span data-fill="name"></span> · <span data-fill="address"></span></span><span>Site by Dixwell Digital</span></div></footer>
+
+<div class="mobile-bar"><a class="btn" data-tel href="#">Call</a><button class="btn btn-red" type="button" data-book="">Book</button></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true">
+  <div class="sheet-head">
+    <h2 id="sheet-title">Book a visit</h2>
+    <button class="close" type="button" id="close" aria-label="Close booking"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <form id="book-form" novalidate>
+    <fieldset class="chips" id="f-service"><legend class="gt">What does it need?</legend></fieldset>
+    <div><span class="gt" id="day-title">Which day works?</span><div class="chips days" id="f-day" role="radiogroup" aria-labelledby="day-title"></div></div>
+    <div><span class="gt" id="time-title">What time?</span><div class="chips" id="f-time" role="radiogroup" aria-labelledby="time-title"></div></div>
+    <div class="two">
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" required></div>
+      <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+    </div>
+    <div class="field"><label for="f-car">Car (optional)</label><input id="f-car" placeholder="2012 Buick LaCrosse"></div>
+  </form>
+  <div class="sheet-foot">
+    <p class="summary" id="summary"></p>
+    <p class="error" id="error" role="alert"></p>
+    <button class="btn btn-red" type="submit" form="book-form">Request this time</button>
+    <p class="callalt">Rather talk to a person? Call <a data-tel data-fill="phone" href="#"></a></p>
+  </div>
+  <div class="done">
+    <div class="check"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F4ECDD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2 style="font-size:32px">Thank you.</h2>
+    <p id="done-text"></p>
+    <p class="demo">Demo preview: nothing was sent. On the live site this request goes straight to the shop by email and text, and the customer gets a text to confirm the time.</p>
+    <button class="btn" type="button" id="done-close">Done</button>
+  </div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===== Edit this block for each shop. Everything on the page reads from it. ===== */
+const SHOP = {
+  name: "Mike's Auto Clinic",
+  since: 1973,
+  owner: "— Mike's Auto Clinic, Hamden",
+  town: "Hamden, CT",
+  street: "28 Gorham Ave",
+  phone: "(203) 281-3171",
+  rating: "4.6",
+  reviewCount: "77",
+  warrantyShort: "8 to 5",
+  tagline: "A family-owned Hamden repair shop. Fair prices, clear explanations and solid work on foreign and domestic cars.",
+  hours: [null, ["8:00","17:00"], ["8:00","17:00"], ["8:00","17:00"], ["8:00","17:00"], ["8:00","17:00"], null],
+  slots: ["8:00 AM", "9:30 AM", "11:00 AM", "1:00 PM", "2:30 PM"],
+  services: [
+    {id:"oil", name:"Oil & filter change", short:"Oil change", blurb:"Conventional or synthetic, with a look-over while it's up.", time:"About 30 min", from:""},
+    {id:"brakes", name:"Brakes", short:"Brakes", blurb:"Pads, rotors, shoes and drums. Squeaks and grinding checked.", time:"Often same day", from:""},
+    {id:"engine", name:"Check engine light & diagnostics", short:"Check engine", blurb:"We read the code and tell you what it really means.", time:"1–2 hrs", from:""},
+    {id:"tires", name:"Tires & wheels", short:"Tires", blurb:"Flats, rotation and balancing.", time:"About 1 hr", from:""},
+    {id:"battery", name:"Battery, starter & alternator", short:"Battery", blurb:"Won't start? We'll find out why.", time:"Often same day", from:""},
+    {id:"ac", name:"Heat & air conditioning", short:"Heat & AC", blurb:"Recharge, leak checks, heater and blower repairs.", time:"Same day quote", from:""},
+    {id:"suspension", name:"Steering & suspension", short:"Suspension", blurb:"Shocks, struts, tie rods and front-end work.", time:"Same day quote", from:""},
+    {id:"other", name:"Something else", short:"Not sure / other", blurb:"Tell us what you're hearing, seeing or smelling.", time:"At drop-off", from:""}
+  ],
+  // Real Google reviews, quoted with the reviewer's first name and last initial.
+  reviews: [
+    {text:"John and his guys know cars, new and old. They are honest. They do little extra things that make a difference.", who:"Nick N. · Google review"},
+    {text:"Not only was the staff extremely friendly, but the price was top-notch, and you all got my car in and out so quickly.", who:"Angela · Google review"},
+    {text:"They are competitive, complete the work as promised, and are easy to work with. Very pleased here.", who:"Ed D. · Google review"}
+  ]
+};
+const PARTS = [
+  {id:"engine", name:"Engine", no:"01", dir:[1, 0, 0.05], side:"left"},
+  {id:"battery", name:"Battery", no:"02", dir:[0.6, 0, 0.8], side:"left"},
+  {id:"ac", name:"Heat & AC", no:"03", dir:[0, 0, 1], side:"left"},
+  {id:"brakes", name:"Brakes", no:"04", dir:[0.45, 0, -1], side:"right"},
+  {id:"tires", name:"Tires", no:"05", dir:[-0.45, 0, -1], side:"right"},
+  {id:"suspension", name:"Suspension", no:"06", dir:[-1, 0, 0.1], side:"right"}
+];
+/* ===== End of shop settings ===== */
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const telHref = "tel:+1" + SHOP.phone.replace(/\D/g, "");
+const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const fmt = t => { let [h, m] = t.split(":").map(Number); const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return m ? `${h}:${String(m).padStart(2, "0")} ${ap}` : `${h} ${ap}`; };
+const toMin = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+const svcById = id => SHOP.services.find(s => s.id === id);
+const priceText = s => s.from ? (s.from.startsWith("$") ? "from " : "") + s.from : "Ask for a quote";
+
+const now = new Date(), today = SHOP.hours[now.getDay()], mins = now.getHours() * 60 + now.getMinutes();
+const openNow = !!today && mins >= toMin(today[0]) && mins < toMin(today[1]);
+const FILL = {
+  name: SHOP.name, town: SHOP.town, address: `${SHOP.street}, ${SHOP.town}`, phone: SHOP.phone, rating: SHOP.rating,
+  reviews: SHOP.reviewCount, since: SHOP.since, tagline: SHOP.tagline, warrantyShort: SHOP.warrantyShort, year: now.getFullYear(),
+  owner: SHOP.owner, years: now.getFullYear() - SHOP.since, townLine: `Family owned · ${SHOP.town}`,
+  open: today ? (openNow ? `Open now until ${fmt(today[1])}` : `Open today ${fmt(today[0])} to ${fmt(today[1])}`) : "Closed today"
+};
+$$("[data-fill]").forEach(el => el.textContent = FILL[el.dataset.fill]);
+$$("[data-tel]").forEach(el => el.href = telHref);
+$$("[data-directions]").forEach(el => el.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(`${SHOP.name}, ${SHOP.street}, ${SHOP.town}`));
+$$("[data-hours]").forEach(el => el.innerHTML = [1,2,3,4,5,6,0].map(d => {
+  const h = SHOP.hours[d];
+  return `<tr class="${d === now.getDay() ? "today" : ""}"><td>${DAYS[d]}</td><td>${h ? `${fmt(h[0])} – ${fmt(h[1])}` : "Closed"}</td></tr>`;
+}).join(""));
+
+$("#menu-list").innerHTML = SHOP.services.map(s => `
+  <button class="item" type="button" data-book="${s.id}" aria-label="Book ${s.name}, ${priceText(s)}">
+    <span class="line"><b>${s.name}</b><i></i><span>${priceText(s)}</span></span>
+    <p>${s.blurb}<small>${s.time}</small></p>
+  </button>`).join("");
+
+$("#rev").innerHTML = SHOP.reviews.map(r => `
+  <figure class="review"><span class="stars" aria-label="5 stars">★★★★★</span><blockquote>“${r.text}”</blockquote><figcaption>${r.who}</figcaption></figure>`).join("");
+
+const optHTML = p => { const s = svcById(p.id); return `<button class="opt" type="button" data-book="${p.id}" data-part="${p.id}" aria-label="Book ${s.name}"><span class="no">No. ${p.no}</span><b>${p.name}</b><small>${priceText(s)} · ${s.time}</small></button>`; };
+$("#opts-left").innerHTML = PARTS.filter(p => p.side === "left").map(optHTML).join("");
+$("#opts-right").innerHTML = PARTS.filter(p => p.side === "right").map(optHTML).join("");
+
+/* ===== Booking card ===== */
+$("#f-service").insertAdjacentHTML("beforeend", SHOP.services.map(s =>
+  `<label class="chip"><input type="radio" name="svc" value="${s.id}"><span>${s.short || s.name}</span></label>`).join(""));
+const openDays = [];
+for (let i = 1; openDays.length < 6 && i < 21; i++) { const d = new Date(now); d.setDate(now.getDate() + i); if (SHOP.hours[d.getDay()]) openDays.push(d); }
+$("#f-day").innerHTML = openDays.map((d, i) => `<label class="chip"><input type="radio" name="day" value="${i}" ${i === 0 ? "checked" : ""}><span><small>${i === 0 && d.getDate() === new Date(now.getTime() + 864e5).getDate() ? "Tomorrow" : DAYS[d.getDay()].slice(0, 3)}</small>${d.toLocaleDateString("en-US", {month:"short", day:"numeric"})}</span></label>`).join("");
+const picked = n => document.querySelector(`input[name="${n}"]:checked`);
+function renderSlots() {
+  const d = openDays[+picked("day").value], close = toMin(SHOP.hours[d.getDay()][1]);
+  const ok = SHOP.slots.filter(s => { const [t, ap] = s.split(" "); let [h, m] = t.split(":").map(Number); if (ap === "PM" && h !== 12) h += 12; return h * 60 + m <= close - 90; });
+  const prev = picked("time")?.value;
+  $("#f-time").innerHTML = ok.map((s, i) => `<label class="chip"><input type="radio" name="time" value="${s}" ${(prev ? s === prev : i === 0) ? "checked" : ""}><span>${s}</span></label>`).join("");
+  if (!picked("time")) document.querySelector('input[name="time"]').checked = true;
+  summary();
+}
+function summary() {
+  const s = svcById(picked("svc")?.value), d = openDays[+picked("day").value];
+  $("#summary").innerHTML = `<b>${s && s.id !== "other" ? s.name : "Check-up"}</b> · ${DAYS[d.getDay()]}, ${d.toLocaleDateString("en-US", {month:"short", day:"numeric"})} · ${picked("time")?.value}`;
+}
+let lastFocus = null;
+function openBooking(id) {
+  lastFocus = document.activeElement;
+  document.body.classList.remove("sent");
+  const r = document.querySelector(`input[name="svc"][value="${id || "other"}"]`); if (r) r.checked = true;
+  renderSlots(); $("#error").textContent = "";
+  document.body.classList.add("booking"); $("#sheet").setAttribute("aria-hidden", "false");
+  setTimeout(() => $("#f-name").focus({preventScroll:true}), 60);
+}
+function closeBooking() {
+  document.body.classList.remove("booking"); $("#sheet").setAttribute("aria-hidden", "true");
+  if (lastFocus) lastFocus.focus({preventScroll:true});
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-book]"); if (b) { e.preventDefault(); openBooking(b.dataset.book); } });
+["#close", "#done-close", "#scrim"].forEach(s => $(s).addEventListener("click", closeBooking));
+document.addEventListener("keydown", e => {
+  if (!document.body.classList.contains("booking")) return;
+  if (e.key === "Escape") closeBooking();
+  if (e.key === "Tab") {
+    const f = $$("#sheet button, #sheet input, #sheet a").filter(el => el.offsetParent !== null);
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  }
+});
+$("#f-day").addEventListener("change", renderSlots);
+$("#book-form").addEventListener("change", summary);
+$("#book-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("#f-name").value.trim(), phone = $("#f-phone").value.replace(/\D/g, "");
+  if (!name) { $("#error").textContent = "Add your name so the shop knows who's coming."; $("#f-name").focus(); return; }
+  if (phone.length < 10) { $("#error").textContent = "Add a 10-digit phone number so the shop can confirm your time."; $("#f-phone").focus(); return; }
+  const d = openDays[+picked("day").value];
+  $("#done-text").textContent = `${name}, your request for ${DAYS[d.getDay()]}, ${d.toLocaleDateString("en-US", {month:"long", day:"numeric"})} at ${picked("time").value} is filled in. ${SHOP.name} would call or text ${$("#f-phone").value.trim()} to confirm.`;
+  document.body.classList.add("sent"); $("#done-close").focus();
+});
+renderSlots();
+
+/* ===== 3D engine (shared by Dixwell demos): turns slowly, highlights the part facing you ===== */
+function makeCar3D(o) {
+  let ok = false;
+  try { ok = !!window.THREE && !!document.createElement("canvas").getContext("webgl"); } catch (e) {}
+  if (!ok) { o.stage.classList.add("no3d"); return null; }
+  const T = THREE, {stage, canvas, label} = o;
+  const renderer = new T.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const scene = new T.Scene(), camera = new T.PerspectiveCamera(o.fov, 1.6, 0.1, 100);
+  const look = new T.Vector3(...o.look); camera.position.set(...o.cam); camera.lookAt(look);
+  const dist = camera.position.distanceTo(look);
+  scene.add(new T.AmbientLight(0xffffff, o.ambient ?? 0.8));
+  const sun = new T.DirectionalLight(0xffffff, o.sun ?? 0.65); sun.position.set(4, 8, 6); scene.add(sun);
+  const car = new T.Group(); scene.add(car);
+  const parts = {};
+  const mat = (color, rough = 0.6, extra) => new T.MeshStandardMaterial(Object.assign({color, roughness:rough, metalness:0.1, flatShading:!!o.flat}, extra));
+  const outline = (mesh, color, opacity = 1) => { mesh.add(new T.LineSegments(new T.EdgesGeometry(mesh.geometry, 25), new T.LineBasicMaterial({color, transparent:opacity < 1, opacity}))); return mesh; };
+  const add = (id, mesh) => { mesh.userData.part = id; mesh.userData.base = mesh.material.color.getHex(); (parts[id] = parts[id] || []).push(mesh); car.add(mesh); return mesh; };
+  o.build({T, scene, car, add, mat, outline});
+
+  const accent = new T.Color(o.accent), black = new T.Color(0);
+  let active = null;
+  function setActive(id) {
+    if (id === active || !parts[id]) return;
+    active = id;
+    for (const [pid, ms] of Object.entries(parts)) for (const m of ms) {
+      const on = pid === id;
+      m.material.color.setHex(on ? o.accent : m.userData.base);
+      m.material.emissive.copy(on ? accent : black).multiplyScalar(on ? (o.glow ?? 0.35) : 0);
+    }
+    label.hidden = false;
+    o.onActive(id);
+  }
+  const up = new T.Vector3(0, 1, 0), v = new T.Vector3(), camDir = new T.Vector3().copy(camera.position).sub(look).setY(0).normalize();
+  function facing() {
+    let best = null, bs = -2, cur = -2;
+    for (const p of o.parts) {
+      v.set(p.dir[0], 0, p.dir[2]).normalize().applyAxisAngle(up, car.rotation.y);
+      const sc = v.dot(camDir);
+      if (sc > bs) { bs = sc; best = p.id; }
+      if (p.id === active) cur = sc;
+    }
+    if (!active || bs > cur + 0.12) setActive(best);
+  }
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let target = null, hold = 0, hover = false, dragging = false, lastX = 0, downX = 0;
+  function focusPart(id, ms = 3500) {
+    const p = o.parts.find(x => x.id === id); if (!p) return;
+    setActive(id);
+    let th = -Math.atan2(p.dir[0], p.dir[2]) + (o.angle ?? 0.45);
+    th += Math.round((car.rotation.y - th) / (2 * Math.PI)) * 2 * Math.PI;
+    hold = performance.now() + ms;
+    if (reduce) car.rotation.y = th; else target = th;
+  }
+  const box = new T.Box3(), c = new T.Vector3();
+  function placeLabel() {
+    if (!active) return;
+    box.makeEmpty(); parts[active].forEach(m => box.expandByObject(m));
+    box.getCenter(c); c.y = box.max.y + 0.08; c.project(camera);
+    const r = canvas.getBoundingClientRect(), half = label.offsetWidth / 2 + 8;
+    label.style.left = Math.min(Math.max((c.x + 1) / 2 * r.width, half), r.width - half) + "px";
+    label.style.top = Math.max((1 - c.y) / 2 * r.height - 18, label.offsetHeight + 8) + "px";
+  }
+  function resize() {
+    const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return;
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / r.height;
+    camera.fov = Math.max(o.fov, 2 * Math.atan(o.fit / dist / camera.aspect) * 180 / Math.PI);
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(stage); resize();
+  car.rotation.y = o.start ?? -0.55;
+  stage.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") hover = true; });
+  stage.addEventListener("pointerleave", () => { hover = false; });
+  canvas.addEventListener("pointerdown", e => { dragging = true; target = null; lastX = downX = e.clientX; canvas.classList.add("dragging"); canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointermove", e => { if (!dragging) return; car.rotation.y += (e.clientX - lastX) * 0.01; lastX = e.clientX; hold = performance.now() + 2500; });
+  const ray = new T.Raycaster(), ndc = new T.Vector2();
+  canvas.addEventListener("pointerup", e => {
+    dragging = false; canvas.classList.remove("dragging");
+    if (Math.abs(e.clientX - downX) > 6) return;
+    const r = canvas.getBoundingClientRect();
+    ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(Object.values(parts).flat())[0];
+    if (hit) { focusPart(hit.object.userData.part); o.onPick(hit.object.userData.part); }
+  });
+  const speed = reduce ? 0 : (o.speed ?? 0.3);
+  let visible = true, running = false, last = 0;
+  function loop(t) {
+    if (!visible) { running = false; return; }
+    const dt = Math.min((t - last) / 1000, 0.05); last = t;
+    if (target !== null) { const d = target - car.rotation.y; car.rotation.y += d * Math.min(1, dt * 6); if (Math.abs(d) < 0.002) target = null; }
+    else if (!hover && !dragging && t > hold) car.rotation.y += speed * dt;
+    if (target === null && (dragging || t > hold)) facing();
+    renderer.render(scene, camera);
+    placeLabel();
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !running) { running = true; last = performance.now(); requestAnimationFrame(loop); } }).observe(stage);
+  facing();
+  return {focusPart, setActive};
+}
+
+/* ===== This demo's car: a classic three-box sedan in cream "clay" on a turntable ===== */
+const INK = 0x2B1D14, RED = 0x9B2C1F;
+const car3d = makeCar3D({
+  stage: $("#stage"), canvas: $("#car3d"), label: $("#part-label"), parts: PARTS,
+  cam: [0, 3.3, 7.8], look: [0, 0.5, 0], fov: 30, fit: 3.25, accent: RED, glow: 0.3, ambient: 0.75, sun: 0.6, speed: 0.25,
+  build({T, car, add, mat, outline}) {
+    // Turntable disc turns with the car
+    const disc = new T.Mesh(new T.CylinderGeometry(2.6, 2.6, 0.08, 72), mat(0xE9DDC7, 0.9)); disc.position.y = -0.04; car.add(disc);
+    for (const r of [1.95, 2.45]) { const ring = new T.Mesh(new T.RingGeometry(r, r + 0.015, 96), new T.MeshBasicMaterial({color:0xB9A98E})); ring.rotation.x = -Math.PI / 2; ring.position.y = 0.005; car.add(ring); }
+    for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2; const tick = new T.Mesh(new T.PlaneGeometry(0.02, 0.14), new T.MeshBasicMaterial({color:0xB9A98E})); tick.rotation.x = -Math.PI / 2; tick.rotation.z = a; tick.position.set(Math.sin(a) * 2.25, 0.006, Math.cos(a) * 2.25); car.add(tick); }
+    // Body: rounded three-box sedan, translucent cream so the parts show through
+    const pts = [[-2.35,0.36],[2.3,0.36],[2.38,0.62],[2.25,0.86],[0.95,0.92],[0.35,1.44],[-0.85,1.47],[-1.55,1.0],[-2.3,0.96],[-2.4,0.66]];
+    const shape = new T.Shape(); shape.moveTo(...pts[0]); pts.slice(1).forEach(p => shape.lineTo(...p)); shape.closePath();
+    const body = new T.ExtrudeGeometry(shape, {depth:1.56, bevelEnabled:true, bevelThickness:0.08, bevelSize:0.06, bevelSegments:3}); body.translate(0, 0, -0.78);
+    const shell = new T.Mesh(body, mat(0xFFF6E6, 0.85, {transparent:true, opacity:0.62, depthWrite:false}));
+    car.add(shell);
+    car.add(new T.LineSegments(new T.EdgesGeometry(body, 35), new T.LineBasicMaterial({color:INK})));
+    for (const z of [0.87, -0.87]) {
+      const P = a => new T.Vector3(a[0], a[1], z);
+      const win = [[0.85,0.94],[0.36,1.36],[-0.82,1.39],[-1.4,0.98],[0.85,0.94]].map(P);
+      car.add(new T.Line(new T.BufferGeometry().setFromPoints(win), new T.LineBasicMaterial({color:INK})));
+      car.add(new T.Line(new T.BufferGeometry().setFromPoints([[-0.25,0.42],[-0.25,1.38]].map(P)), new T.LineBasicMaterial({color:INK, transparent:true, opacity:0.45})));
+      car.add(new T.Line(new T.BufferGeometry().setFromPoints([[0.62,0.45],[0.62,0.93]].map(P)), new T.LineBasicMaterial({color:INK, transparent:true, opacity:0.45})));
+    }
+    // Chrome bumpers
+    for (const x of [2.44, -2.46]) { const b = new T.Mesh(new T.BoxGeometry(0.08, 0.12, 1.6), mat(0xCFC6B8, 0.3, {metalness:0.6})); b.position.set(x, 0.5, 0); car.add(b); }
+    const TAN = 0xD9C6A5;
+    const part = (id, geo, x, y, z, color = TAN) => { const m = add(id, new T.Mesh(geo, mat(color, 0.7))); m.position.set(x, y, z); outline(m, INK, 0.6); return m; };
+    const tireGeo = new T.CylinderGeometry(0.39, 0.39, 0.28, 40).rotateX(Math.PI / 2);
+    const capGeo = new T.CylinderGeometry(0.2, 0.2, 0.3, 28).rotateX(Math.PI / 2);
+    for (const [x, z] of [[1.45,0.8],[1.45,-0.8],[-1.5,0.8],[-1.5,-0.8]]) {
+      if (x < 0 && z < 0) part("tires", tireGeo, x, 0.39, z, 0x4A3A2E);
+      else { const t = new T.Mesh(tireGeo, mat(0x4A3A2E, 0.95)); t.position.set(x, 0.39, z); car.add(t); }
+      const cap = new T.Mesh(capGeo, mat(0xF4EEE3, 0.3, {metalness:0.4})); cap.position.set(x, 0.39, z); outline(cap, INK, 0.4); car.add(cap);
+    }
+    part("brakes", new T.CylinderGeometry(0.27, 0.27, 0.04, 32).rotateX(Math.PI / 2), 1.45, 0.39, -0.96);
+    part("brakes", new T.BoxGeometry(0.16, 0.22, 0.08), 1.65, 0.52, -1.0);
+    part("engine", new T.BoxGeometry(0.85, 0.36, 0.8), 1.55, 0.66, -0.1);
+    part("engine", new T.CylinderGeometry(0.17, 0.17, 0.1, 24), 1.4, 0.89, -0.1);
+    part("battery", new T.BoxGeometry(0.32, 0.24, 0.34), 1.85, 0.68, 0.52);
+    part("ac", new T.BoxGeometry(0.32, 0.18, 1.3), 0.6, 0.86, 0);
+    part("ac", new T.BoxGeometry(0.05, 0.26, 1.1), 2.22, 0.55, 0);
+    for (const z of [0.56, -0.56]) part("suspension", new T.CylinderGeometry(0.06, 0.06, 0.5, 12), -1.5, 0.7, z);
+    part("suspension", new T.BoxGeometry(0.1, 0.1, 1.4), -1.5, 0.39, 0);
+  },
+  onActive(id) {
+    const p = PARTS.find(x => x.id === id);
+    $("#part-label-text").textContent = p.name;
+    $("#part-label").dataset.book = id;
+    $$(".opt").forEach(b => b.classList.toggle("active", b.dataset.part === id));
+  },
+  onPick: openBooking
+});
+if (car3d) {
+  const preview = e => { const b = e.target.closest(".opt"); if (b) car3d.focusPart(b.dataset.part); };
+  $$(".opts").forEach(el => { el.addEventListener("mouseover", preview); el.addEventListener("focusin", preview); });
+}
+</script>
+</body>
+</html>

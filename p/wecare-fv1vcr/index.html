@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>We Care Auto Repair · Preview by Dixwell Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Dixwell Digital demo: "Brightside" (friendly neighborhood care).
+   Best for: family-friendly general repair, quick-lube and maintenance shops, first-time car owners.
+   Layout: "what are you noticing?" symptom picker that lights up the part on a 3D SUV and suggests the service,
+   pastel service cards, a bento grid of perks, FAQ, booking in a rounded modal. */
+:root{
+  --bg:#FFFFFF; --soft:#F2F6FF; --soft2:#E4ECFF; --line:#E1E7F3;
+  --ink:#0F1B3D; --muted:#4F5D7E;
+  --blue:#2B5BFF; --blue-dk:#1C43D9;
+  --sun:#FFC94D; --mint:#DDF5EA; --peach:#FFE7DD; --lilac:#ECE6FF;
+  --font:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:90px}
+.preview-bar{background:#0F1B3D;color:#fff;font-size:13px;line-height:1.4;text-align:center;padding:8px 16px}.preview-bar b{color:#FFC94D}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:10px}
+h1,h2,h3{margin:0;line-height:1.08;text-wrap:balance;font-weight:800}
+h1{font-size:clamp(40px,5.4vw,66px);letter-spacing:-1.6px}
+h1 span,h2 span{color:var(--blue)}
+h2{font-size:clamp(32px,4vw,48px);letter-spacing:-1px}
+h3{font-size:19px;font-weight:700;letter-spacing:-.3px}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:700 16px var(--font);text-decoration:none;cursor:pointer;border:0;background:var(--soft2);color:var(--ink);transition:background .15s,transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:var(--blue-dk)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--soft);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600;color:var(--muted)}
+.pill b{color:#E5A100}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:78px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo svg{flex-shrink:0}
+nav{display:flex;gap:4px;background:var(--soft);border-radius:999px;padding:5px}
+nav a{text-decoration:none;font-size:15px;font-weight:600;padding:9px 16px;border-radius:999px;color:var(--muted)}
+nav a:hover{background:#fff;color:var(--ink)}
+.head-r{display:flex;gap:10px;align-items:center}
+.head-r .btn{min-height:46px;padding:0 20px;font-size:15px}
+
+/* Hero */
+.hero{padding:44px 0 72px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:center}
+.hero h1{margin-top:20px}
+.hero .sub{font-size:19px;color:var(--muted);margin-top:18px;max-width:42ch}
+.ask{margin-top:30px;font-weight:700;font-size:15px}
+.symptoms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.sym{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:2px solid var(--line);font-size:15px;font-weight:600;line-height:1.3;min-height:58px;transition:border-color .15s,background .15s}
+.sym .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:var(--soft)}
+.sym:hover{border-color:#B9C8F5}
+.sym[aria-pressed="true"]{border-color:var(--blue);background:var(--soft)}
+.sym[aria-pressed="true"] .ic{background:var(--blue)}
+.sym[aria-pressed="true"] .ic svg{stroke:#fff}
+.sym:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.result{margin-top:14px;border-radius:20px;background:var(--ink);color:#fff;padding:18px 18px 18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.result[hidden]{display:none}
+.result small{display:block;font-size:13px;color:#AFC0E8;font-weight:500}
+.result b{font-size:19px}
+.result .meta{font-size:14px;color:#D3DDF5}
+.result .btn{min-height:46px;background:var(--sun);color:var(--ink)}
+.or{margin-top:16px;font-size:15px;color:var(--muted)}
+.or button{all:unset;cursor:pointer;color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+.stage-card{position:relative;border-radius:36px;background:radial-gradient(ellipse 70% 60% at 50% 60%,#fff 0%,rgba(255,255,255,0) 70%),linear-gradient(160deg,#E9F0FF,#DCE6FF);padding:0;overflow:hidden}
+.stage{position:relative;aspect-ratio:1/0.92}
+.stage canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+.stage canvas.dragging{cursor:grabbing}
+.stage-card.no3d{display:none}
+.float{position:absolute;background:#fff;border-radius:16px;padding:10px 14px;font-size:13px;font-weight:600;box-shadow:0 12px 30px -16px rgba(15,27,61,.35);display:flex;align-items:center;gap:10px;pointer-events:none}
+.float i{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-style:normal}
+.float.a{left:18px;top:18px}.float.b{right:18px;bottom:18px}
+.part-label{position:absolute;left:0;top:0;transform:translate(-50%,-100%);display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:0;border-radius:999px;padding:8px 16px;font:700 14px var(--font);cursor:pointer;white-space:nowrap;min-height:40px;box-shadow:0 10px 24px -10px rgba(43,91,255,.7)}
+.part-label::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:16px;background:var(--blue);transform:translateX(-50%)}
+.part-label[hidden]{display:none}
+.drag{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-size:13px;color:var(--muted);font-weight:600;pointer-events:none}
+
+/* Trust row */
+.trust{background:var(--soft)}
+.trust .wrap{display:flex;justify-content:space-between;gap:16px 28px;flex-wrap:wrap;padding-top:22px;padding-bottom:22px;font-weight:600;font-size:15px}
+.trust .wrap>span{white-space:nowrap}
+.ck{color:var(--blue);margin-right:8px}
+
+section.block{padding:100px 0}
+.head{text-align:center;max-width:680px;margin:0 auto 52px}
+.head p{color:var(--muted);font-size:18px;margin-top:16px}
+.head .pill{margin-bottom:18px}
+
+/* Service cards */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{border-radius:24px;border:2px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:#B9C8F5;box-shadow:0 18px 40px -28px rgba(15,27,61,.45)}
+.card .bub{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;margin-bottom:6px}
+.card p{font-size:15px;color:var(--muted)}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.card .price{font-weight:800;font-size:16px}
+.card .price small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.card button{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;background:var(--soft);display:grid;place-items:center;transition:background .15s}
+.card button:hover{background:var(--blue)}
+.card button:hover svg{stroke:#fff}
+.card button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto;gap:18px}
+.tile{border-radius:28px;padding:30px;background:var(--soft)}
+.tile p{color:var(--muted);margin-top:10px;font-size:16px}
+.tile.big{grid-row:span 2;background:var(--blue);color:#fff;display:flex;flex-direction:column}
+.tile.big p{color:#DCE5FF}
+.phone{margin-top:28px;background:#fff;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;color:var(--ink);flex:1}
+.msg{max-width:85%;border-radius:16px;padding:10px 14px;font-size:14px;line-height:1.45}
+.msg.in{background:var(--soft);border-bottom-left-radius:4px}
+.msg.out{background:var(--blue);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg .ph{display:block;height:84px;border-radius:10px;margin-top:8px;background:repeating-linear-gradient(135deg,#D5DEF5 0 10px,#E4EAF8 10px 20px)}
+.msg small{display:block;font-size:11px;opacity:.7;margin-top:4px}
+.tile.mint{background:var(--mint)}.tile.peach{background:var(--peach)}.tile.lilac{background:var(--lilac)}.tile.sun{background:#FFF3D1}
+.tile .ti{width:48px;height:48px;border-radius:14px;background:#fff;display:grid;place-items:center;margin-bottom:18px}
+
+/* Reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.review{margin:0;border-radius:24px;border:2px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:16px}
+.review blockquote{margin:0;font-size:17px}
+.stars{color:#E5A100;letter-spacing:2px}
+.who{display:flex;align-items:center;gap:12px;margin-top:auto;font-weight:700;font-size:15px}
+.who i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-style:normal;background:var(--soft2);color:var(--blue)}
+.who small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+
+/* FAQ + visit */
+.faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+details{border-bottom:2px solid var(--line);padding:4px 0}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:700;font-size:18px;min-height:64px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";width:34px;height:34px;border-radius:50%;background:var(--soft);display:grid;place-items:center;flex-shrink:0;font-size:20px;color:var(--blue);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);padding:0 48px 20px 0}
+.visit-card{border-radius:28px;background:var(--ink);color:#fff;padding:32px;display:flex;flex-direction:column;gap:6px}
+.visit-card .addr{font-size:22px;font-weight:700}
+.hours{width:100%;border-collapse:collapse;margin-top:16px;font-variant-numeric:tabular-nums}
+.hours td{padding:9px 0;border-bottom:1px solid #2A3863;font-size:15px}
+.hours td:last-child{text-align:right;color:#B9C6E8}
+.hours tr.today td{color:var(--sun);font-weight:700}
+.hours tr.today td:last-child{color:var(--sun)}
+.map{margin-top:18px;height:150px;border-radius:18px;background:repeating-linear-gradient(0deg,transparent 0 29px,#22305A 29px 30px),repeating-linear-gradient(90deg,transparent 0 29px,#22305A 29px 30px),#16234A;display:grid;place-items:center;font-size:13px;color:#B9C6E8;text-align:center}
+.map b{display:block;width:16px;height:16px;border-radius:50%;background:var(--sun);margin:0 auto 8px;box-shadow:0 0 0 6px rgba(255,201,77,.25)}
+footer{font-size:14px;color:var(--muted);border-top:2px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;padding-bottom:30px}
+.mobile-bar{display:none}
+
+/* Booking modal */
+.scrim{position:fixed;inset:0;background:rgba(15,27,61,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.sheet{position:fixed;left:50%;top:50%;width:min(560px,calc(100% - 32px));max-height:min(820px,calc(100% - 48px));background:#fff;border-radius:32px;z-index:50;display:flex;flex-direction:column;overflow:hidden;opacity:0;pointer-events:none;transform:translate(-50%,-46%) scale(.98);transition:opacity .2s,transform .2s;box-shadow:0 40px 80px -30px rgba(15,27,61,.5)}
+body.booking .scrim{opacity:1;pointer-events:auto}
+body.booking .sheet{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px 14px}
+.sheet-head h2{font-size:28px;letter-spacing:-.8px}
+.close{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--soft)}
+.close:hover{background:var(--soft2)}
+.close:focus-visible{outline:3px solid var(--blue)}
+.sheet form{flex:1;overflow-y:auto;padding:8px 26px 8px;display:flex;flex-direction:column;gap:24px}
+.gt{display:block;margin-bottom:10px;font-weight:700;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;border:0;margin:0;padding:0}
+.chips legend{padding:0}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--soft);font-size:15px;font-weight:600;cursor:pointer;border:2px solid transparent}
+.chip input:checked+span{background:var(--blue);color:#fff}
+.chip input:focus-visible+span{outline:3px solid var(--blue);outline-offset:2px}
+.days .chip span{flex-direction:column;justify-content:center;min-height:62px;border-radius:18px;line-height:1.15;padding:0 16px}
+.days .chip small{font-size:11px;font-weight:600;opacity:.75;text-transform:uppercase;letter-spacing:.6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field label{display:block;margin-bottom:6px;font-weight:700;font-size:14px}
+.field input{width:100%;min-height:52px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);font:500 17px var(--font);padding:0 16px}
+.field input:focus{outline:none;border-color:var(--blue)}
+.sheet-foot{padding:16px 26px 24px;display:flex;flex-direction:column;gap:10px;background:var(--soft)}
+.sheet-foot .btn{width:100%}
+.summary{font-size:15px;color:var(--muted)}
+.summary b{color:var(--ink)}
+.callalt{font-size:14px;color:var(--muted);text-align:center}
+.error{color:#C2321B;font-size:14px;min-height:20px;font-weight:600}
+.done{display:none;padding:36px 26px;flex-direction:column;gap:16px}
+body.sent .sheet form,body.sent .sheet-foot{display:none}
+body.sent .done{display:flex}
+.done .check{width:60px;height:60px;border-radius:20px;background:var(--mint);display:grid;place-items:center}
+.done .demo{background:var(--soft);border-radius:16px;padding:14px 16px;font-size:14px;color:var(--muted)}
+
+@media (max-width:1040px){
+  nav{display:none}
+  .hero-grid,.faq-grid{grid-template-columns:1fr}
+  .stage-card{order:-1}
+  .stage{aspect-ratio:16/10}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bento{grid-template-columns:1fr 1fr}
+  .tile.big{grid-row:auto;grid-column:span 2}
+  .reviews{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 18px}
+  body{font-size:16px}
+  .hero{padding-top:16px}
+  .head-r .btn:not(.btn-blue){display:none}
+  .head-r .btn{white-space:nowrap;padding:0 16px}
+  .logo{font-size:17px;white-space:nowrap}
+  .logo svg{width:28px;height:28px}
+  .stage{aspect-ratio:4/3.4}
+  .stage-card{border-radius:26px}
+  .float{display:none}
+  .symptoms{grid-template-columns:1fr}
+  section.block{padding:72px 0}
+  .cards,.bento{grid-template-columns:1fr}
+  .tile.big{grid-column:auto}
+  .two{grid-template-columns:1fr}
+  .mobile-bar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -8px 24px -16px rgba(15,27,61,.3)}
+  footer{padding-bottom:80px}
+  .sheet{top:auto;bottom:0;left:0;width:100%;max-height:92%;border-radius:28px 28px 0 0;transform:translateY(100%)}
+  body.booking .sheet{transform:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="preview-bar"><b>Private preview</b> made for We Care Auto Repair by Dixwell Digital. Not live. Wording and services are drafts for you to change.</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Back to top">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#2B5BFF"/><circle cx="17" cy="21" r="7" fill="#FFC94D"/><rect x="5" y="21" width="24" height="8" fill="#2B5BFF"/><path d="M8 24h18" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span data-fill="name"></span>
+    </a>
+    <nav aria-label="Main"><a href="#services">Services</a><a href="#why">Why us</a><a href="#reviews">Reviews</a><a href="#faq">FAQ &amp; hours</a></nav>
+    <div class="head-r"><a class="btn" data-tel href="#">Call us</a><button class="btn btn-blue" type="button" data-book="">Book online</button></div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill"><b>★★★★★</b> <span data-fill="rating"></span> from <span data-fill="reviews"></span> neighbors</span>
+        <h1>Car trouble? <span>Tell us what's going on.</span></h1>
+        <p class="sub" data-fill="tagline"></p>
+        <p class="ask" id="ask">What are you noticing?</p>
+        <div class="symptoms" id="symptoms" role="group" aria-labelledby="ask"></div>
+        <div class="result" id="result" aria-live="polite" hidden>
+          <div><small>Sounds like</small><b id="r-name"></b><div class="meta" id="r-meta"></div></div>
+          <button class="btn" type="button" id="r-book" data-book="">Book this →</button>
+        </div>
+        <p class="or">Just due for a check-up? <button type="button" data-book="oil">Book an oil change</button></p>
+      </div>
+      <div class="stage-card" id="stage-card">
+        <div class="stage" id="stage">
+          <canvas id="car3d" role="img" aria-label="3D SUV you can turn. Tap a highlighted part to book that repair."></canvas>
+          <div class="float a"><i style="background:var(--mint)">✓</i>Honest diagnosis first</div>
+          <div class="float b"><i style="background:#FFF3D1">★</i><span data-fill="warranty"></span></div>
+          <button class="part-label" id="part-label" type="button" data-book="" hidden><span id="part-label-text"></span></button>
+          <span class="drag">Drag to turn · tap a part</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="wrap">
+      <span><b class="ck">✓</b>We check before we fix</span><span><b class="ck">✓</b>Options explained, no pressure</span><span><b class="ck">✓</b>Cars and work trucks</span><span><b class="ck">✓</b>Wheelchair accessible</span>
+    </div>
+  </div>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head"><span class="pill">Services</span><h2>Everything your car needs, <span>in one friendly place.</span></h2><p>Tell us what's going on and we'll explain your options before any work starts. Tap the arrow to book in under a minute.</p></div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <section class="block" id="why" style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><span class="pill">Why We Care</span><h2>Car repair <span>without the stress.</span></h2></div>
+      <div class="bento">
+        <div class="tile big">
+          <h3 style="font-size:26px">We check first, then explain your options.</h3>
+          <p>No jargon and no pressure. You hear what your car needs, what it costs and what can wait, then you decide.</p>
+        </div>
+        <div class="tile mint"><div class="ti">🛻</div><h3>Work trucks welcome</h3><p>Company and work truck repairs, along with everyday cars.</p></div>
+        <div class="tile peach"><div class="ti">📞</div><h3>In a bind? Call.</h3><p>Customers say Kevin finds a way to fit them in when they need their car back fast.</p></div>
+        <div class="tile lilac"><div class="ti">🤝</div><h3>Only what it needs</h3><p data-fill="warrantyLong"></p></div>
+        <div class="tile sun"><div class="ti">💲</div><h3>Fair prices</h3><p>Reasonable, upfront pricing is one of the things customers mention most.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="reviews" style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><span class="pill">Reviews</span><h2>Our neighbors <span>say it best.</span></h2></div>
+      <div class="reviews" id="rev"></div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top:0">
+    <div class="wrap faq-grid">
+      <div>
+        <h2>Questions?</h2>
+        <div style="margin-top:24px" id="faqs"></div>
+      </div>
+      <div class="visit-card">
+        <span style="color:var(--sun);font-weight:700;font-size:14px" data-fill="open"></span>
+        <p class="addr" data-fill="address"></p>
+        <table class="hours" data-hours aria-label="Opening hours"></table>
+        <div class="map" aria-label="Map placeholder"><div><b></b>The live site shows a Google map here</div></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <button class="btn btn-blue" type="button" data-book="">Book online</button>
+          <a class="btn" data-directions href="#">Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© <span data-fill="year"></span> <span data-fill="name"></span> · <span data-fill="address"></span></span><span>Site by Dixwell Digital</span></div></footer>
+
+<div class="mobile-bar"><a class="btn" data-tel href="#">Call</a><button class="btn btn-blue" type="button" data-book="">Book online</button></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true">
+  <div class="sheet-head">
+    <h2 id="sheet-title">Book a visit</h2>
+    <button class="close" type="button" id="close" aria-label="Close booking"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <form id="book-form" novalidate>
+    <fieldset class="chips" id="f-service"><legend class="gt">What does it need?</legend></fieldset>
+    <div><span class="gt" id="day-title">Pick a day</span><div class="chips days" id="f-day" role="radiogroup" aria-labelledby="day-title"></div></div>
+    <div><span class="gt" id="time-title">Drop-off time</span><div class="chips" id="f-time" role="radiogroup" aria-labelledby="time-title"></div></div>
+    <div class="two">
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" required></div>
+      <div class="field"><label for="f-phone">Mobile number</label><input id="f-phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+    </div>
+    <div class="field"><label for="f-car">Car (optional)</label><input id="f-car" placeholder="2020 Toyota RAV4"></div>
+  </form>
+  <div class="sheet-foot">
+    <p class="summary" id="summary"></p>
+    <p class="error" id="error" role="alert"></p>
+    <button class="btn btn-blue" type="submit" form="book-form">Request this time</button>
+    <p class="callalt">Rather talk? Call <a data-tel data-fill="phone" href="#"></a></p>
+  </div>
+  <div class="done">
+    <div class="check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E7A50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2 style="font-size:30px">You're all set!</h2>
+    <p id="done-text"></p>
+    <p class="demo">Demo preview: nothing was sent. On the live site this request goes straight to the shop by email and text, and the customer gets a text to confirm the time.</p>
+    <button class="btn" type="button" id="done-close">Done</button>
+  </div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===== Edit this block for each shop. Everything on the page reads from it. ===== */
+const SHOP = {
+  name: "We Care Auto Repair",
+  town: "Hamden, CT",
+  street: "2485 Whitney Ave",
+  phone: "(203) 535-0872",
+  rating: "4.9",
+  reviewCount: "36",
+  warranty: "4.9 stars on Google",
+  warrantyLong: "We confirm what actually needs replacing before we start, so you never pay for work you didn't need.",
+  tagline: "Honest, friendly car repair on Whitney Ave in Hamden. Pick what you're noticing and we'll point you to the right fix.",
+  hours: [null, ["8:00","17:30"], ["8:00","17:30"], ["8:00","17:30"], ["8:00","17:30"], ["8:00","17:30"], null],
+  slots: ["8:00 AM", "9:30 AM", "11:00 AM", "1:00 PM", "2:30 PM"],
+  services: [
+    {id:"oil", name:"Oil change", blurb:"Synthetic blend or full synthetic.", time:"About 30 min", from:"", icon:"oil", tint:"#FFF3D1"},
+    {id:"brakes", name:"Brakes", blurb:"Squeaks, grinding or a soft pedal. Pads, rotors and fluid.", time:"Same day", from:"", icon:"brake", tint:"#FFE7DD"},
+    {id:"engine", name:"Check engine light", short:"Check engine", blurb:"We find the cause and explain it in plain words.", time:"1–2 hours", from:"", icon:"engine", tint:"#E4ECFF"},
+    {id:"tires", name:"Tires & flats", short:"Tires", blurb:"Flat repairs, rotation and replacement.", time:"About 1 hour", from:"", icon:"tire", tint:"#DDF5EA"},
+    {id:"battery", name:"Battery & starting", short:"Battery", blurb:"Slow starts, dead batteries, starters and alternators.", time:"30 min", from:"", icon:"battery", tint:"#ECE6FF"},
+    {id:"ac", name:"AC & heating", short:"AC & heat", blurb:"Warm air, weak airflow or a funny smell from the vents.", time:"Same day", from:"", icon:"ac", tint:"#E4ECFF"},
+    {id:"suspension", name:"Steering & suspension", short:"Suspension", blurb:"Pulling, shaking or clunks over bumps.", time:"Quote same day", from:"", icon:"wheel", tint:"#DDF5EA"},
+    {id:"other", name:"Not sure?", short:"Not sure / other", blurb:"Tell us what's happening and we'll take a look.", time:"At drop-off", from:"", icon:"other", tint:"#FFE7DD"}
+  ],
+  // Each symptom points to a part on the 3D car and the service it books
+  symptoms: [
+    {text:"Squeaks or grinds when I brake", part:"brakes", icon:"brake"},
+    {text:"Check engine light is on", part:"engine", icon:"engine"},
+    {text:"Slow to start or won't start", part:"battery", icon:"battery"},
+    {text:"AC blows warm air", part:"ac", icon:"ac"},
+    {text:"Pulls, shakes or clunks", part:"suspension", icon:"wheel"},
+    {text:"Tire looks low or flat", part:"tires", icon:"tire"}
+  ],
+  faqs: [
+    {q:"Do I need an appointment?", a:"Appointments are recommended. Call or book online and we'll find you a time."},
+    {q:"Will you do work without asking me?", a:"No. We check first, explain what we find, and only do the work you approve."},
+    {q:"Do you work on company trucks?", a:"Yes. Along with everyday cars, we repair company and work trucks."},
+    {q:"Is the shop accessible, and do you take cards?", a:"Yes. The entrance and parking lot are wheelchair accessible, and we take credit and debit cards."}
+  ],
+  // Real Google reviews, quoted with the reviewer's first name and last initial.
+  reviews: [
+    {text:"Kevin was professional, honest, and made sure to check my brakes first before doing any work.", who:"Erik H. · Google review", i:"E"},
+    {text:"Very properly named, they do really care about your auto repair.", who:"Kala D. · Google review", i:"K"},
+    {text:"Kevin is hands down the best mechanic. He's reliable, understanding and very professional.", who:"Hector M. · Google review", i:"H"}
+  ]
+};
+const PARTS = [
+  {id:"engine", name:"Engine", dir:[1, 0, 0.05]},
+  {id:"battery", name:"Battery", dir:[0.6, 0, 0.8]},
+  {id:"ac", name:"AC & heat", dir:[0, 0, 1]},
+  {id:"suspension", name:"Suspension", dir:[-1, 0, 0.1]},
+  {id:"tires", name:"Tires", dir:[-0.45, 0, -1]},
+  {id:"brakes", name:"Brakes", dir:[0.45, 0, -1]}
+];
+/* ===== End of shop settings ===== */
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const telHref = "tel:+1" + SHOP.phone.replace(/\D/g, "");
+const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const fmt = t => { let [h, m] = t.split(":").map(Number); const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return m ? `${h}:${String(m).padStart(2, "0")} ${ap}` : `${h} ${ap}`; };
+const toMin = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+const svcById = id => SHOP.services.find(s => s.id === id);
+const priceText = s => s.from ? (s.from.startsWith("$") ? "from " : "") + s.from : "Ask for a quote";
+const ICONS = {
+  brake:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M5 7a9 9 0 0 1 4-3"/>',
+  oil:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  engine:'<path d="M4 10h3l2-3h6l2 3h3v7h-3l-2 2H9l-2-2H4z"/><path d="M12 11v3"/>',
+  ac:'<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/>',
+  battery:'<rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 4v3M17 4v3M7 13h3M15.5 11.5v3M14 13h3"/>',
+  wheel:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M5 16l5.3-3M19 16l-5.3-3"/>',
+  tire:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/>',
+  other:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5V14M12 17.5v.01"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>'
+};
+const icon = (n, size = 22, color = "#0F1B3D") => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
+
+const now = new Date(), today = SHOP.hours[now.getDay()], mins = now.getHours() * 60 + now.getMinutes();
+const openNow = !!today && mins >= toMin(today[0]) && mins < toMin(today[1]);
+const FILL = {
+  name: SHOP.name, address: `${SHOP.street}, ${SHOP.town}`, phone: SHOP.phone, rating: SHOP.rating, reviews: SHOP.reviewCount,
+  tagline: SHOP.tagline, warranty: SHOP.warranty, warrantyLong: SHOP.warrantyLong, year: now.getFullYear(),
+  open: today ? (openNow ? `● Open now until ${fmt(today[1])}` : `Open today ${fmt(today[0])} to ${fmt(today[1])}`) : "Closed today"
+};
+$$("[data-fill]").forEach(el => el.textContent = FILL[el.dataset.fill]);
+$$("[data-tel]").forEach(el => el.href = telHref);
+$$("[data-directions]").forEach(el => el.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(`${SHOP.name}, ${SHOP.street}, ${SHOP.town}`));
+$$("[data-hours]").forEach(el => el.innerHTML = [1,2,3,4,5,6,0].map(d => {
+  const h = SHOP.hours[d];
+  return `<tr class="${d === now.getDay() ? "today" : ""}"><td>${DAYS[d]}</td><td>${h ? `${fmt(h[0])} – ${fmt(h[1])}` : "Closed"}</td></tr>`;
+}).join(""));
+
+$("#cards").innerHTML = SHOP.services.map(s => `
+  <article class="card">
+    <div class="bub" style="background:${s.tint}">${icon(s.icon, 24)}</div>
+    <h3>${s.name}</h3><p>${s.blurb}</p>
+    <div class="foot"><span class="price">${priceText(s)}<small>${s.time}</small></span><button type="button" data-book="${s.id}" aria-label="Book ${s.name}">${icon("arrow", 20)}</button></div>
+  </article>`).join("");
+$("#rev").innerHTML = SHOP.reviews.map(r => `
+  <figure class="review"><span class="stars" aria-label="5 stars">★★★★★</span><blockquote>“${r.text}”</blockquote><figcaption class="who"><i>${r.i}</i><span>${r.who}<small>Google</small></span></figcaption></figure>`).join("");
+$("#faqs").innerHTML = SHOP.faqs.map(f => `<details><summary>${f.q}</summary><p>${f.a}</p></details>`).join("");
+
+/* Symptom picker */
+$("#symptoms").innerHTML = SHOP.symptoms.map((s, i) => `<button class="sym" type="button" aria-pressed="false" data-i="${i}"><span class="ic">${icon(s.icon, 18)}</span>${s.text}</button>`).join("");
+let car3d = null;
+function pickSymptom(i) {
+  const sym = SHOP.symptoms[i], s = svcById(sym.part);
+  $$(".sym").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.i === i)));
+  $("#r-name").textContent = s.name;
+  $("#r-meta").textContent = `${priceText(s)} · ${s.time}`;
+  $("#r-book").dataset.book = s.id;
+  $("#result").hidden = false;
+  if (car3d) car3d.focusPart(sym.part, 9000);
+}
+$("#symptoms").addEventListener("click", e => { const b = e.target.closest(".sym"); if (b) pickSymptom(+b.dataset.i); });
+
+/* ===== Booking modal ===== */
+$("#f-service").insertAdjacentHTML("beforeend", SHOP.services.map(s =>
+  `<label class="chip"><input type="radio" name="svc" value="${s.id}"><span>${s.short || s.name}</span></label>`).join(""));
+const openDays = [];
+for (let i = 1; openDays.length < 6 && i < 21; i++) { const d = new Date(now); d.setDate(now.getDate() + i); if (SHOP.hours[d.getDay()]) openDays.push(d); }
+$("#f-day").innerHTML = openDays.map((d, i) => `<label class="chip"><input type="radio" name="day" value="${i}" ${i === 0 ? "checked" : ""}><span><small>${i === 0 && d.getDate() === new Date(now.getTime() + 864e5).getDate() ? "Tomorrow" : DAYS[d.getDay()].slice(0, 3)}</small>${d.toLocaleDateString("en-US", {month:"short", day:"numeric"})}</span></label>`).join("");
+const picked = n => document.querySelector(`input[name="${n}"]:checked`);
+function renderSlots() {
+  const d = openDays[+picked("day").value], close = toMin(SHOP.hours[d.getDay()][1]);
+  const ok = SHOP.slots.filter(s => { const [t, ap] = s.split(" "); let [h, m] = t.split(":").map(Number); if (ap === "PM" && h !== 12) h += 12; return h * 60 + m <= close - 90; });
+  const prev = picked("time")?.value;
+  $("#f-time").innerHTML = ok.map((s, i) => `<label class="chip"><input type="radio" name="time" value="${s}" ${(prev ? s === prev : i === 0) ? "checked" : ""}><span>${s}</span></label>`).join("");
+  if (!picked("time")) document.querySelector('input[name="time"]').checked = true;
+  summary();
+}
+function summary() {
+  const s = svcById(picked("svc")?.value), d = openDays[+picked("day").value];
+  $("#summary").innerHTML = `<b>${s && s.id !== "other" ? s.name : "Check-up"}</b> · ${DAYS[d.getDay()]}, ${d.toLocaleDateString("en-US", {month:"short", day:"numeric"})} · ${picked("time")?.value}`;
+}
+let lastFocus = null;
+function openBooking(id) {
+  lastFocus = document.activeElement;
+  document.body.classList.remove("sent");
+  const r = document.querySelector(`input[name="svc"][value="${id || "other"}"]`); if (r) r.checked = true;
+  renderSlots(); $("#error").textContent = "";
+  document.body.classList.add("booking"); $("#sheet").setAttribute("aria-hidden", "false");
+  setTimeout(() => $("#f-name").focus({preventScroll:true}), 60);
+}
+function closeBooking() {
+  document.body.classList.remove("booking"); $("#sheet").setAttribute("aria-hidden", "true");
+  if (lastFocus) lastFocus.focus({preventScroll:true});
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-book]"); if (b) { e.preventDefault(); openBooking(b.dataset.book); } });
+["#close", "#done-close", "#scrim"].forEach(s => $(s).addEventListener("click", closeBooking));
+document.addEventListener("keydown", e => {
+  if (!document.body.classList.contains("booking")) return;
+  if (e.key === "Escape") closeBooking();
+  if (e.key === "Tab") {
+    const f = $$("#sheet button, #sheet input, #sheet a").filter(el => el.offsetParent !== null);
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  }
+});
+$("#f-day").addEventListener("change", renderSlots);
+$("#book-form").addEventListener("change", summary);
+$("#book-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("#f-name").value.trim(), phone = $("#f-phone").value.replace(/\D/g, "");
+  if (!name) { $("#error").textContent = "Add your name so we know who's coming."; $("#f-name").focus(); return; }
+  if (phone.length < 10) { $("#error").textContent = "Add a 10-digit mobile number so we can text you to confirm."; $("#f-phone").focus(); return; }
+  const d = openDays[+picked("day").value];
+  $("#done-text").textContent = `Thanks, ${name}! Your request for ${DAYS[d.getDay()]}, ${d.toLocaleDateString("en-US", {month:"long", day:"numeric"})} at ${picked("time").value} is filled in. ${SHOP.name} would text ${$("#f-phone").value.trim()} to confirm.`;
+  document.body.classList.add("sent"); $("#done-close").focus();
+});
+renderSlots();
+
+/* ===== 3D engine (shared by Dixwell demos): turns slowly, highlights the part facing you ===== */
+function makeCar3D(o) {
+  let ok = false;
+  try { ok = !!window.THREE && !!document.createElement("canvas").getContext("webgl"); } catch (e) {}
+  if (!ok) { o.stage.classList.add("no3d"); return null; }
+  const T = THREE, {stage, canvas, label} = o;
+  const renderer = new T.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const scene = new T.Scene(), camera = new T.PerspectiveCamera(o.fov, 1.6, 0.1, 100);
+  const look = new T.Vector3(...o.look); camera.position.set(...o.cam); camera.lookAt(look);
+  const dist = camera.position.distanceTo(look);
+  scene.add(new T.AmbientLight(0xffffff, o.ambient ?? 0.8));
+  const sun = new T.DirectionalLight(0xffffff, o.sun ?? 0.65); sun.position.set(4, 8, 6); scene.add(sun);
+  const car = new T.Group(); scene.add(car);
+  const parts = {};
+  const mat = (color, rough = 0.6, extra) => new T.MeshStandardMaterial(Object.assign({color, roughness:rough, metalness:0.1, flatShading:!!o.flat}, extra));
+  const outline = (mesh, color, opacity = 1) => { mesh.add(new T.LineSegments(new T.EdgesGeometry(mesh.geometry, 25), new T.LineBasicMaterial({color, transparent:opacity < 1, opacity}))); return mesh; };
+  const add = (id, mesh) => { mesh.userData.part = id; mesh.userData.base = mesh.material.color.getHex(); (parts[id] = parts[id] || []).push(mesh); car.add(mesh); return mesh; };
+  o.build({T, scene, car, add, mat, outline});
+
+  const accent = new T.Color(o.accent), black = new T.Color(0);
+  let active = null;
+  function setActive(id) {
+    if (id === active || !parts[id]) return;
+    active = id;
+    for (const [pid, ms] of Object.entries(parts)) for (const m of ms) {
+      const on = pid === id;
+      m.material.color.setHex(on ? o.accent : m.userData.base);
+      m.material.emissive.copy(on ? accent : black).multiplyScalar(on ? (o.glow ?? 0.35) : 0);
+    }
+    label.hidden = false;
+    o.onActive(id);
+  }
+  const up = new T.Vector3(0, 1, 0), v = new T.Vector3(), camDir = new T.Vector3().copy(camera.position).sub(look).setY(0).normalize();
+  function facing() {
+    let best = null, bs = -2, cur = -2;
+    for (const p of o.parts) {
+      v.set(p.dir[0], 0, p.dir[2]).normalize().applyAxisAngle(up, car.rotation.y);
+      const sc = v.dot(camDir);
+      if (sc > bs) { bs = sc; best = p.id; }
+      if (p.id === active) cur = sc;
+    }
+    if (!active || bs > cur + 0.12) setActive(best);
+  }
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let target = null, hold = 0, hover = false, dragging = false, lastX = 0, downX = 0;
+  function focusPart(id, ms = 3500) {
+    const p = o.parts.find(x => x.id === id); if (!p) return;
+    setActive(id);
+    let th = -Math.atan2(p.dir[0], p.dir[2]) + (o.angle ?? 0.45);
+    th += Math.round((car.rotation.y - th) / (2 * Math.PI)) * 2 * Math.PI;
+    hold = performance.now() + ms;
+    if (reduce) car.rotation.y = th; else target = th;
+  }
+  const box = new T.Box3(), c = new T.Vector3();
+  function placeLabel() {
+    if (!active) return;
+    box.makeEmpty(); parts[active].forEach(m => box.expandByObject(m));
+    box.getCenter(c); c.y = box.max.y + 0.08; c.project(camera);
+    const r = canvas.getBoundingClientRect(), half = label.offsetWidth / 2 + 8;
+    label.style.left = Math.min(Math.max((c.x + 1) / 2 * r.width, half), r.width - half) + "px";
+    label.style.top = Math.max((1 - c.y) / 2 * r.height - 18, label.offsetHeight + 8) + "px";
+  }
+  function resize() {
+    const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return;
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / r.height;
+    camera.fov = Math.max(o.fov, 2 * Math.atan(o.fit / dist / camera.aspect) * 180 / Math.PI);
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(stage); resize();
+  car.rotation.y = o.start ?? -0.55;
+  stage.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") hover = true; });
+  stage.addEventListener("pointerleave", () => { hover = false; });
+  canvas.addEventListener("pointerdown", e => { dragging = true; target = null; lastX = downX = e.clientX; canvas.classList.add("dragging"); canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointermove", e => { if (!dragging) return; car.rotation.y += (e.clientX - lastX) * 0.01; lastX = e.clientX; hold = performance.now() + 2500; });
+  const ray = new T.Raycaster(), ndc = new T.Vector2();
+  canvas.addEventListener("pointerup", e => {
+    dragging = false; canvas.classList.remove("dragging");
+    if (Math.abs(e.clientX - downX) > 6) return;
+    const r = canvas.getBoundingClientRect();
+    ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(Object.values(parts).flat())[0];
+    if (hit) { focusPart(hit.object.userData.part); o.onPick(hit.object.userData.part); }
+  });
+  const speed = reduce ? 0 : (o.speed ?? 0.3);
+  let visible = true, running = false, last = 0;
+  function loop(t) {
+    if (!visible) { running = false; return; }
+    const dt = Math.min((t - last) / 1000, 0.05); last = t;
+    if (target !== null) { const d = target - car.rotation.y; car.rotation.y += d * Math.min(1, dt * 6); if (Math.abs(d) < 0.002) target = null; }
+    else if (!hover && !dragging && t > hold) car.rotation.y += speed * dt;
+    if (target === null && (dragging || t > hold)) facing();
+    renderer.render(scene, camera);
+    placeLabel();
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !running) { running = true; last = performance.now(); requestAnimationFrame(loop); } }).observe(stage);
+  facing();
+  return {focusPart, setActive};
+}
+
+/* ===== This demo's car: a soft white SUV with blue outlines ===== */
+const BLUE = 0x2B5BFF;
+car3d = makeCar3D({
+  stage: $("#stage-card"), canvas: $("#car3d"), label: $("#part-label"), parts: PARTS,
+  cam: [0, 2.7, 8.2], look: [0, 0.85, 0], fov: 28, fit: 2.85, accent: BLUE, glow: 0.4, ambient: 0.85, sun: 0.55, speed: 0.28,
+  build({T, scene, car, add, mat, outline}) {
+    const shadow = new T.Mesh(new T.CircleGeometry(1, 48), new T.MeshBasicMaterial({color:0x2B5BFF, transparent:true, opacity:0.1}));
+    shadow.rotation.x = -Math.PI / 2; shadow.scale.set(2.7, 1.3, 1); shadow.position.y = 0.01; scene.add(shadow);
+    const pts = [[-2.2,0.42],[2.15,0.42],[2.27,0.72],[2.12,1.0],[1.15,1.1],[0.55,1.76],[-1.95,1.8],[-2.22,1.58],[-2.3,1.02]];
+    const shape = new T.Shape(); shape.moveTo(...pts[0]); pts.slice(1).forEach(p => shape.lineTo(...p)); shape.closePath();
+    const body = new T.ExtrudeGeometry(shape, {depth:1.66, bevelEnabled:true, bevelThickness:0.1, bevelSize:0.08, bevelSegments:4}); body.translate(0, 0, -0.83);
+    car.add(new T.Mesh(body, mat(0xFFFFFF, 0.9, {transparent:true, opacity:0.55, depthWrite:false})));
+    car.add(new T.LineSegments(new T.EdgesGeometry(body, 35), new T.LineBasicMaterial({color:BLUE, transparent:true, opacity:0.55})));
+    for (const z of [0.93, -0.93]) {
+      const P = a => new T.Vector3(a[0], a[1], z);
+      car.add(new T.Line(new T.BufferGeometry().setFromPoints([[1.05,1.12],[0.58,1.68],[-1.8,1.7],[-1.95,1.14],[1.05,1.12]].map(P)), new T.LineBasicMaterial({color:BLUE, transparent:true, opacity:0.8})));
+      for (const x of [0.3, -0.85]) car.add(new T.Line(new T.BufferGeometry().setFromPoints([[x,0.5],[x,1.7]].map(P)), new T.LineBasicMaterial({color:BLUE, transparent:true, opacity:0.35})));
+    }
+    // Roof rails
+    for (const z of [0.55, -0.55]) { const r = new T.Mesh(new T.BoxGeometry(2.0, 0.05, 0.05), mat(0x9FB3E8, 0.5)); r.position.set(-0.7, 1.92, z); car.add(r); }
+    const SOFT = 0xC9D5F5;
+    const part = (id, geo, x, y, z, color = SOFT) => { const m = add(id, new T.Mesh(geo, mat(color, 0.55))); m.position.set(x, y, z); outline(m, BLUE, 0.45); return m; };
+    const tireGeo = new T.CylinderGeometry(0.45, 0.45, 0.32, 40).rotateX(Math.PI / 2);
+    const rimGeo = new T.CylinderGeometry(0.25, 0.25, 0.34, 6).rotateX(Math.PI / 2);
+    for (const [x, z] of [[1.4,0.86],[1.4,-0.86],[-1.45,0.86],[-1.45,-0.86]]) {
+      if (x < 0 && z < 0) part("tires", tireGeo, x, 0.45, z, 0x3A4668);
+      else { const t = new T.Mesh(tireGeo, mat(0x3A4668, 0.9)); t.position.set(x, 0.45, z); car.add(t); }
+      const rim = new T.Mesh(rimGeo, mat(0xF4F7FF, 0.35)); rim.position.set(x, 0.45, z); car.add(rim);
+    }
+    part("brakes", new T.CylinderGeometry(0.3, 0.3, 0.04, 32).rotateX(Math.PI / 2), 1.4, 0.45, -1.04);
+    part("brakes", new T.BoxGeometry(0.18, 0.24, 0.08), 1.62, 0.6, -1.08);
+    part("engine", new T.BoxGeometry(0.85, 0.4, 0.85), 1.55, 0.8, -0.1);
+    for (const z of [-0.34, 0.14]) part("engine", new T.BoxGeometry(0.7, 0.1, 0.22), 1.55, 1.05, z);
+    part("battery", new T.BoxGeometry(0.32, 0.26, 0.36), 1.8, 0.8, 0.6);
+    part("ac", new T.BoxGeometry(0.34, 0.2, 1.4), 0.75, 1.02, 0);
+    part("ac", new T.BoxGeometry(0.05, 0.3, 1.2), 2.18, 0.62, 0);
+    for (const z of [0.62, -0.62]) part("suspension", new T.CylinderGeometry(0.07, 0.07, 0.55, 12), -1.45, 0.8, z);
+    part("suspension", new T.BoxGeometry(0.1, 0.1, 1.55), -1.45, 0.45, 0);
+  },
+  onActive(id) {
+    const p = PARTS.find(x => x.id === id);
+    $("#part-label-text").textContent = `${p.name} · Book →`;
+    $("#part-label").dataset.book = id;
+  },
+  onPick: openBooking
+});
+</script>
+</body>
+</html>
